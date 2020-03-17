@@ -19,7 +19,12 @@ agent any
   //}
   stage('unit test'){
    steps{
-    sh ' echo "hello world" '
+    
+    sh """
+    cd node
+    cat "pwd" 
+    """
+    //sh ' echo "hello world" '
    }
   }
  }
