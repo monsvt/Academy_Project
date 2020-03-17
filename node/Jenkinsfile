@@ -22,7 +22,7 @@ agent any
     
     sh """
     cd node
-    cat "pwd" 
+    pwd
     """
     //sh ' echo "hello world" '
    }
