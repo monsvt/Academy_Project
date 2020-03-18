@@ -1,0 +1,32 @@
+pipeline { 
+agent any
+ environment{
+  EXECUTE = true
+ }
+ stages {
+  stage('git'){
+   steps{
+    git credentialsId: 'github', url: 'https://github.com/monsvt/Academy_Project'
+   }
+  }
+  stage('Install dependencies'){
+   steps{
+    sh """
+    cd node
+    npm install
+    npm start &
+    """
+   }
+  }
+  stage('unit test'){
+   steps{
+    
+    sh """
+    cd node
+    echo 'Running test...'
+    """
+    //sh ' echo "hello world" '
+   }
+  }
+ }
+}
