@@ -9,6 +9,16 @@ agent any
     git credentialsId: 'github', url: 'https://github.com/monsvt/Academy_Project'
    }
   }
+  stage('unit test'){
+   steps{
+    
+    sh """
+    cd node
+    echo 'Running test...'
+    """
+    //sh ' echo "hello world" '
+   }
+  }
   stage('SonarQube'){
     environment {
         scannerHome = tool 'SonarQubeScanner'
@@ -22,23 +32,13 @@ agent any
         //}
    }
   }
-  stage('Install dependencies'){
+  stage('Install dependencies & build'){
    steps{
     sh """
     cd node
     npm install
     npm start &
     """
-   }
-  }
-  stage('unit test'){
-   steps{
-    
-    sh """
-    cd node
-    echo 'Running test...'
-    """
-    //sh ' echo "hello world" '
    }
   }
  }
