@@ -1,12 +1,25 @@
 pipeline { 
 agent any
- environment{
-  EXECUTE = true
- }
+ //environment{
+  //EXECUTE = true
+ //}
  stages {
   stage('git'){
    steps{
     git credentialsId: 'github', url: 'https://github.com/monsvt/Academy_Project'
+   }
+  }
+  stage('SonarQube'){
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
+    }
+   steps {
+    withSonarQubeEnv('SonarQube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
    }
   }
   stage('Install dependencies'){
