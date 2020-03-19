@@ -1,9 +1,10 @@
 pipeline { 
 agent any
 tools {nodejs "node"}
- //environment{
-  //EXECUTE = true
- //}
+ 
+ environment{
+  EXECUTE = true
+ }
  stages {
   stage('git'){
    steps{
