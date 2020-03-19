@@ -58,7 +58,7 @@ tools {nodejs "node"}
      steps{
        sh """
        cd node
-       npm start &
+       npm start 
        """
      }
    }
