@@ -57,7 +57,7 @@ tools {nodejs "node"}
    stage('Deployment'){
      steps{
        sh """
-
+       cd node 
        npm start 
        """
      }
