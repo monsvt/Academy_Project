@@ -30,7 +30,7 @@ tools {nodejs "node"}
      //npm test
    }
   }
-  
+  /*
   stage('Linting'){
    steps{
     sh """
@@ -52,8 +52,10 @@ tools {nodejs "node"}
         }
    }
   }
+  */
    stage('Deployment'){
      steps{
+       cd node
        npm start &
      }
    }
