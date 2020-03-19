@@ -1,9 +1,9 @@
 pipeline { 
 agent any
-//tools {nodejs "node"}
-environment{
-  EXECUTE = true
- }
+tools {nodejs "node"}
+//environment{
+  //EXECUTE = true
+ //}
 
  stages {
   stage('git'){
@@ -11,25 +11,35 @@ environment{
     git credentialsId: 'github', url: 'https://github.com/monsvt/Academy_Project'
    }
   }
-  /*stage('unit test'){
+   
+   stage('Install dependencies & build'){
+   steps{
+    sh """
+    cd node
+    npm install
+    """
+   }
+  }
+   
+  stage('unit test'){
    steps{
     sh """
     cd node
     echo 'Running test...'
     """
-    //sh ' echo "hello world" '
+     //npm test
    }
   }
-  */
-  //stage('Linting'){
-   //steps{
-    //sh """
-    //cd node
-    //eslint .
-    //"""
-   //}
-  //}
-  /*stage('SonarQube'){
+  
+  stage('Linting'){
+   steps{
+    sh """
+    cd node
+    eslint .
+    """
+   }
+  }
+  stage('SonarQube'){
     environment {
         scannerHome = tool 'SonarQubeScanner'
     }
@@ -42,14 +52,11 @@ environment{
         }
    }
   }
-  */stage('Install dependencies & build'){
-   steps{
-    sh """
-    cd node
-    npm install
-    npm start &
-    """
+   stage('Deployment'){
+     steps{
+       npm start &
+     }
    }
-  }
+  
  }
 }
