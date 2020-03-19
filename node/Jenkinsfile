@@ -1,6 +1,6 @@
 pipeline { 
 agent any
-tools {nodejs "node"}
+//tools {nodejs "node"}
 environment{
   EXECUTE = true
  }
@@ -11,7 +11,7 @@ environment{
     git credentialsId: 'github', url: 'https://github.com/monsvt/Academy_Project'
    }
   }
-  stage('unit test'){
+  /*stage('unit test'){
    steps{
     sh """
     cd node
@@ -20,6 +20,7 @@ environment{
     //sh ' echo "hello world" '
    }
   }
+  */
   //stage('Linting'){
    //steps{
     //sh """
