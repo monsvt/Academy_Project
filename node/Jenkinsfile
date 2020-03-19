@@ -1,10 +1,7 @@
 pipeline { 
 agent any
 //tools {nodejs "node"}
- 
- environment{
-  EXECUTE = true
- }
+
  stages {
   stage('git'){
    steps{
@@ -13,12 +10,19 @@ agent any
   }
   stage('unit test'){
    steps{
-    
     sh """
     cd node
     echo 'Running test...'
     """
     //sh ' echo "hello world" '
+   }
+  }
+  stage('Linting'){
+   steps{
+    sh """
+    cd node
+    eslint .
+    """
    }
   }
   stage('SonarQube'){
@@ -35,6 +39,9 @@ agent any
    }
   }
   stage('Install dependencies & build'){
+   environment{
+  EXECUTE = true
+ }
    steps{
     sh """
     cd node
