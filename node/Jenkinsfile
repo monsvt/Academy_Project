@@ -1,6 +1,9 @@
 pipeline { 
 agent any
-//tools {nodejs "node"}
+tools {nodejs "node"}
+environment{
+  EXECUTE = true
+ }
 
  stages {
   stage('git'){
@@ -25,7 +28,7 @@ agent any
     //"""
    //}
   //}
-  stage('SonarQube'){
+  /*stage('SonarQube'){
     environment {
         scannerHome = tool 'SonarQubeScanner'
     }
@@ -38,10 +41,7 @@ agent any
         }
    }
   }
-  stage('Install dependencies & build'){
-   environment{
-  EXECUTE = true
- }
+  */stage('Install dependencies & build'){
    steps{
     sh """
     cd node
