@@ -1,5 +1,6 @@
 pipeline { 
 agent any
+tools {nodejs "node"}
  //environment{
   //EXECUTE = true
  //}
@@ -27,9 +28,9 @@ agent any
     withSonarQubeEnv('SonarQube') {
             sh "${scannerHome}/bin/sonar-scanner"
         }
-        //timeout(time: 10, unit: 'MINUTES') {
-           // waitForQualityGate abortPipeline: true
-        //}
+        timeout(time: 10, unit: 'MINUTES') {
+           waitForQualityGate abortPipeline: true
+        }
    }
   }
   stage('Install dependencies & build'){
