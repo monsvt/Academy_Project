@@ -17,14 +17,14 @@ agent any
     //sh ' echo "hello world" '
    }
   }
-  stage('Linting'){
-   steps{
-    sh """
-    cd node
-    eslint .
-    """
-   }
-  }
+  //stage('Linting'){
+   //steps{
+    //sh """
+    //cd node
+    //eslint .
+    //"""
+   //}
+  //}
   stage('SonarQube'){
     environment {
         scannerHome = tool 'SonarQubeScanner'
