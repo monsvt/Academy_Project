@@ -1,24 +1,45 @@
 pipeline { 
 agent any
- //environment{
+tools {nodejs "node"}
+//environment{
   //EXECUTE = true
  //}
+
  stages {
   stage('git'){
    steps{
     git credentialsId: 'github', url: 'https://github.com/monsvt/Academy_Project'
    }
   }
+   
+   stage('Install dependencies & build'){
+   steps{
+    sh """
+    cd node
+    npm install
+    """
+   }
+  }
+   
   stage('unit test'){
    steps{
-    
     sh """
     cd node
     echo 'Running test...'
     """
-    //sh ' echo "hello world" '
+     //npm test
    }
   }
+  /*
+  stage('Linting'){
+   steps{
+    sh """
+    cd node
+    eslint .
+    """
+   }
+  }
+   */
   stage('SonarQube'){
     environment {
         scannerHome = tool 'SonarQubeScanner'
@@ -27,19 +48,20 @@ agent any
     withSonarQubeEnv('SonarQube') {
             sh "${scannerHome}/bin/sonar-scanner"
         }
-        //timeout(time: 10, unit: 'MINUTES') {
-           // waitForQualityGate abortPipeline: true
-        //}
+        timeout(time: 10, unit: 'MINUTES') {
+           waitForQualityGate abortPipeline: true
+        }
    }
   }
-  stage('Install dependencies & build'){
-   steps{
-    sh """
-    cd node
-    npm install
-    npm start &
-    """
+  
+   stage('Deployment'){
+     steps{
+       sh """
+       cd node 
+       npm start 
+       """
+     }
    }
-  }
+  
  }
 }
