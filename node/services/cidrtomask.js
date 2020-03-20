@@ -14,7 +14,7 @@ export const cidrToMaskFunction = (value) => {
 
     function createMask(cidr) {
     var mask=[];
-    var i;
+    //var i;
     for(let i=0;i<4;i++) {
     var n= Math.min(cidr,8);
     mask.push(256-Math.pow(2,8-n));
