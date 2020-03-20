@@ -21,7 +21,7 @@ tools {nodejs "node"}
    }
   }
    
-  /*
+  
   stage('Linting'){
    steps{
     sh """
@@ -30,7 +30,7 @@ tools {nodejs "node"}
     """
    }
   }
-   */
+   
     stage('Unit test'){
    steps{
     sh """
