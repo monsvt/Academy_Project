@@ -39,7 +39,7 @@ tools {nodejs "node"}
     """
    }
   }
-   */
+   
   stage('SonarQube'){
     environment {
         scannerHome = tool 'SonarQubeScanner'
@@ -53,6 +53,7 @@ tools {nodejs "node"}
         }
    }
   }
+  */
   
    stage('Deployment'){
      steps{
