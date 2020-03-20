@@ -40,7 +40,7 @@ tools {nodejs "node"}
     """
    }
   }
-  /*
+  
   stage('Static code analysis'){
     environment {
         scannerHome = tool 'SonarQubeScanner'
@@ -54,7 +54,7 @@ tools {nodejs "node"}
         }
    }
   }
-  */
+  
   
    stage('Deploy'){
      steps{
