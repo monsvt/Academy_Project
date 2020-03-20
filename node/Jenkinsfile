@@ -26,8 +26,8 @@ tools {nodejs "node"}
     sh """
     cd node
     echo 'Running test...'
+    npm test
     """
-     //npm test
    }
   }
   /*
